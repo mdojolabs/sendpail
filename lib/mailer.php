@@ -3,7 +3,6 @@
 
 function sendmail($sendgrid_user,$sendgrid_pass, $from, $to, $subject, $body) {
    $url = 'https://api.sendgrid.com/';
-   ///Q-ar4u4bv-7g3g';
 
   $params = array(
       'api_user'  => $user,
