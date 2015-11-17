@@ -1,40 +1,29 @@
 <?php
 
+/* this essentially becomes a wrapper for sendgrid class in v3 api*/
+function send($from, $to, $subject, $body) {
+  
+    //For reference SendGrid V3 API also supports the use of API Keys - https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html
+    //See https://github.com/sendgrid/sendgrid-php#usage
+  
+    $sendgrid = new SendGrid($_ENV['SENDGRID_APIKEY']); //replace the sendgrid api with your generated API, use $_ENV if you're using php dotenv library 
 
-function sendmail($sendgrid_user,$sendgrid_pass, $from, $to, $subject, $body) {
-   $url = 'https://api.sendgrid.com/';
-   ///Q-ar4u4bv-7g3g';
+    //---- btw if you prefer to use username password ----
+    //$sendgrid_username = $_ENV['SENDGRID_USERNAME']; 
+    //$sendgrid_password = $_ENV['SENDGRID_PASSWORD'];
 
-  $params = array(
-      'api_user'  => $user,
-      'api_key'   => $pass,
-      'from'      => $from,
-      'to'        => $to,
-      'subject'   => $subject,
-      'html'      => $body,
-      'text'      => strip_tags($body),
-    );
+    //------ instantiate the sendgrid with username  password 
+    //$sendgrid = new SendGrid($sendgrid_username, $sendgrid_password);
+    
+    $email = new SendGrid\Email();
+    
+    $email->addTo($to)
+          ->setFrom($from)
+          ->setSubject($subject)
+          ->setText(strip_tags($body,'<br>'))
+          ->setHtml($body);
+   
 
-
-  $request =  $url.'api/mail.send.json';
-
-  // Generate curl request
-  $session = curl_init($request);
-  // Tell curl to use HTTP POST
-  curl_setopt ($session, CURLOPT_POST, true);
-
-  //auth 
-  $authorization = "Authorization: Bearer <YourBearerTokenHere SG.>";
-
-  curl_setopt($session, CURLOPT_HTTPHEADER, $authorization);
-
-  // Tell curl that this is the body of the POST
-  curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
-  // Tell curl not to return headers, but do return the response
-  curl_setopt($session, CURLOPT_HEADER, false);
-  // Tell PHP not to use SSLv3 (instead opting for TLS)
-  curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
-  curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-
+    $sendgrid->send($email);
 
 }

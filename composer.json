@@ -1,6 +1,7 @@
 {
     "require": {
+      "sendgrid/sendgrid": "~4.0",
       "lichtner/fluentpdo": "dev-master",
-        "vlucas/phpdotenv": "^2.0"  
+      "vlucas/phpdotenv": "^2.0"  
     }
 }
