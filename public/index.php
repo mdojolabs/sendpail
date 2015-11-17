@@ -1,10 +1,9 @@
 <?php
-require('../app/watcher.php');
-require('../app.php');
-
-function isJSON($string){
-   return is_string($string) && is_object(json_decode($string)) ? true : false;
+if($_SERVER['REQUEST_METHOD'] == 'GET') {
+   echo 'exiting..';
+   exit;
 }
+require('../app.php');
 
 $app = '';
 

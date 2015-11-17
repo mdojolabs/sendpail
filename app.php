@@ -1,5 +1,11 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
+//simple check if isJSON
+function isJSON($string){
+   return is_string($string) && is_object(json_decode($string)) ? true : false;
+}
+
+
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
@@ -7,6 +13,7 @@ $dotenv->load();
 require('lib/mailer.php');
 $sendgrid_user = $_ENV['SENDGRID_USERNAME'];
 $sendgrid_pass = $_ENV['SENDGRID_PASSWORD'];
+
 if(isset($_POST['message'])) {
   $message = $_POST['message'];
   if(isJSON($message)) {
