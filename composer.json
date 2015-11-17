@@ -1,0 +1,6 @@
+{
+    "require": {
+      "lichtner/fluentpdo": "dev-master",
+        "vlucas/phpdotenv": "^2.0"  
+    }
+}
