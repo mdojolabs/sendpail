@@ -1,6 +1,7 @@
 {
     "require": {
       "lichtner/fluentpdo": "dev-master",
-        "vlucas/phpdotenv": "^2.0"  
+      "vlucas/phpdotenv": "^2.0",  
+      "predis/predis": "1.1.*@dev"
     }
 }

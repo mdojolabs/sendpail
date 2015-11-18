@@ -22,9 +22,9 @@ if(isset($_POST['message'])) {
     //-> if $msg->body is html, text version of email is just the strip_tag-ed (strips out html), allowing only <br> html tag
     sendmail($sendgrid_user,$sendgrid_pass, $msg->from, $msg->to, $msg->subject, $msg->body); 
   }
-  //else {
-  //throw error/do something...
-  //  var_dump($message);
-  //}
+  else {
+  //throw error/alert yourself or something...
+    var_dump($message);
+  }
 }
 

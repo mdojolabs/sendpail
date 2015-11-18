@@ -1,13 +1,15 @@
 <?php
+/* Disallow GET requests to sendpail */
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
-   echo 'exiting..';
+
+   echo 'Invalid request.';
+
    exit;
-}
-require('../app.php');
 
-$app = '';
+} else {
 
-if(isset($_REQUEST['application'])) {
-  $app = $_REQUEST['application'];
+  //here is where the magic happens
+  require('../app.php');
+
 }
 

@@ -24,10 +24,10 @@ function sendmail($sendgrid_user,$sendgrid_pass, $from, $to, $subject, $body) {
   // Tell curl to use HTTP POST
   curl_setopt ($session, CURLOPT_POST, true);
 
-  //auth 
-  $authorization = "Authorization: Bearer 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";
+  //auth change this
+  $authorization = array("Authorization: Bearer SG.NhbmJlOnlvdXJoYWxv.aWNhbmJlOnlvdXJoYWxaWNhbmJlOnlvdXJoYWxvH7Qe08");
 
-  curl_setopt($session, CURLOPT_HTTPHEADER, $authorization);
+  curl_setopt($session, CURLOPT_HTTPHEADER, $authorization); //auth needs to be in array
 
   // Tell curl that this is the body of the POST
   curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
