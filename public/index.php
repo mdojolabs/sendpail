@@ -1,14 +1,15 @@
 <?php
-require('../app/watcher.php');
-require('../app.php');
+/* Disallow GET requests to sendpail */
+if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-function isJSON($string){
-   return is_string($string) && is_object(json_decode($string)) ? true : false;
-}
+   echo 'Invalid request.';
 
-$app = '';
+   exit;
 
-if(isset($_REQUEST['application'])) {
-  $app = $_REQUEST['application'];
+} else {
+
+  //here is where the magic happens
+  require('../app.php');
+
 }
 

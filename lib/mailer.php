@@ -5,15 +5,17 @@ function sendmail($sendgrid_user,$sendgrid_pass, $from, $to, $subject, $body) {
    $url = 'https://api.sendgrid.com/';
 
   $params = array(
-      'api_user'  => $user,
-      'api_key'   => $pass,
+      'api_user'  => $sendgrid_user,
+      'api_key'   => $sendgrid_pass,
       'from'      => $from,
       'to'        => $to,
       'subject'   => $subject,
       'html'      => $body,
       'text'      => strip_tags($body),
     );
-
+  echo $to . "\r\n";
+  echo $subject . "\r\n";
+  echo $body . "\r\n";
 
   $request =  $url.'api/mail.send.json';
 
@@ -22,10 +24,10 @@ function sendmail($sendgrid_user,$sendgrid_pass, $from, $to, $subject, $body) {
   // Tell curl to use HTTP POST
   curl_setopt ($session, CURLOPT_POST, true);
 
-  //auth 
-  $authorization = "Authorization: Bearer <YourBearerTokenHere SG.>";
+  //auth change this
+  $authorization = array("Authorization: Bearer SG.aWNhbmJlOnlvdXJwamVtcGF3anB.pb2NqcGFqd.2VmamNpb3Bh.d21laW9wamFvc.H.d.l.a...");
 
-  curl_setopt($session, CURLOPT_HTTPHEADER, $authorization);
+  curl_setopt($session, CURLOPT_HTTPHEADER, $authorization); //auth needs to be in array
 
   // Tell curl that this is the body of the POST
   curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
@@ -35,5 +37,10 @@ function sendmail($sendgrid_user,$sendgrid_pass, $from, $to, $subject, $body) {
   curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
   curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 
+  $response = curl_exec($session);
+  curl_close($session);
+
+  // print everything out
+  print_r($response);
 
 }

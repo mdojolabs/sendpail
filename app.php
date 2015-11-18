@@ -1,5 +1,11 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
+//simple check if isJSON
+function isJSON($string){
+   return is_string($string) && is_object(json_decode($string)) ? true : false;
+}
+
+
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
@@ -7,6 +13,7 @@ $dotenv->load();
 require('lib/mailer.php');
 $sendgrid_user = $_ENV['SENDGRID_USERNAME'];
 $sendgrid_pass = $_ENV['SENDGRID_PASSWORD'];
+
 if(isset($_POST['message'])) {
   $message = $_POST['message'];
   if(isJSON($message)) {
@@ -15,9 +22,9 @@ if(isset($_POST['message'])) {
     //-> if $msg->body is html, text version of email is just the strip_tag-ed (strips out html), allowing only <br> html tag
     sendmail($sendgrid_user,$sendgrid_pass, $msg->from, $msg->to, $msg->subject, $msg->body); 
   }
-  //else {
-  //throw error/do something...
-  //  var_dump($message);
-  //}
+  else {
+  //throw error/alert yourself or something...
+    var_dump($message);
+  }
 }
 
