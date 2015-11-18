@@ -25,7 +25,7 @@ function sendmail($sendgrid_user,$sendgrid_pass, $from, $to, $subject, $body) {
   curl_setopt ($session, CURLOPT_POST, true);
 
   //auth change this
-  $authorization = array("Authorization: Bearer SG.NhbmJlOnlvdXJoYWxv.aWNhbmJlOnlvdXJoYWxaWNhbmJlOnlvdXJoYWxvH7Qe08");
+  $authorization = array("Authorization: Bearer SG.aWNhbmJlOnlvdXJwamVtcGF3anB.pb2NqcGFqd.2VmamNpb3Bh.d21laW9wamFvc.H.d.l.a...");
 
   curl_setopt($session, CURLOPT_HTTPHEADER, $authorization); //auth needs to be in array
 
